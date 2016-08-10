@@ -1,0 +1,14 @@
+app:
+  image: phase2/nodejs4
+  environment:
+    DNSDOCK_NAME: www
+    DNSDOCK_IMAGE: nodejs4
+  volumes:
+    - .:/code
+  links:
+    - redis
+redis:
+  image: phase2/redis
+  environment:
+    DNSDOCK_NAME: redis
+    DNSDOCK_IMAGE: nodejs4

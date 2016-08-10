@@ -1,0 +1,48 @@
+# Container to run Apache/PHP
+www:
+  # Build specifies where to look for the DOckerfile to build the image
+  # to run this container. This specifies that the DOckerfile will be in the
+  # same directory as this docker-compose.int.yml file.
+  build: .
+  environment:
+    # The DNSDOCK variables make this container 
+    # referenceable by www.d8.vm
+    # It is recommended that your DNSDOCK_NAME match your container name
+    DNSDOCK_NAME: www
+    DNSDOCK_IMAGE: d8
+    # This tell nginx-proxy what virtual host name to route to this container
+    # This can be a comma separated like of domain names. If you are using
+    # ci.p2devcloud.com then the VHost name much be a 4 part domain name of
+    # the form *.ci.p2devcloud.com
+    VIRTUAL_HOST: drupal8.ci.p2devcloud.com
+    # Change some core container settings
+    PHP_MAX_EXECUTION_TIME: 60
+  # Links become entries in /etc/hosts We can refer to the 
+  # database host as db instead of db.d8.vm or IP address
+  links:
+    - db
+  # Broadcast this container has a service running on port 80
+  # This can be used by services like nginx-proxy when proxying
+  expose:
+    - "80"
+  # These src:dest pairs get mapped into the container at the
+  # dest path and override what was built into the image. Both
+  # a directory and an individual file can be overridden.
+  #
+  # Relative src paths and absolute ones pointing inside your home
+  # directory will pull in contents from your host machine.
+  #
+  # Paths using /data are persistent and shared within the docker
+  # machine so they should be namespaced (the value of
+  # $DNSDOCK_IMAGE) was used in this case to create a base of /data/d8
+  volumes:
+    - /data/d8/files:/var/www/html/sites/default/files
+
+# Container to run our database
+db:
+  image: phase2/mariadb
+  environment:
+    DNSDOCK_NAME: db
+    DNSDOCK_IMAGE: d8
+  volumes:
+    - /data/d8/mysql:/var/lib/mysql
