@@ -2,11 +2,10 @@
 # Usage: docker-compose -f build.yml run cli
 cli:
   image: phase2/devtools-build:php70
-  working_dir: /code
+  working_dir: /var/www
   command: /bin/bash
   volumes:
-    - .:/code/
-    - ./html:/var/www/html
+    - .:/var/www/
   external_links:
     - drupal8_db_1:db
 
@@ -16,9 +15,9 @@ cli:
 drush:
   image: phase2/devtools-build:php70
   entrypoint: [ "/init", "drush" ]
-  working_dir: /var/www/html
+  working_dir: /var/www/build/html
   volumes:
-    - ./html:/var/www/html
+    - .:/var/www/
   external_links:
     - drupal8_db_1:db
 
@@ -27,25 +26,24 @@ drush:
 grunt:
   image: phase2/devtools-build:php70
   entrypoint: [ "/init", "grunt" ]
-  working_dir: /code
+  working_dir: /var/www
   volumes:
-    - .:/code/
-    - ./html:/var/www/html
+    - .:/var/www/
   external_links:
     - drupal8_db_1:db
 
-# Container for the drush make command to build the site    
-# Usage: docker-compose -f build.yml run make
-make:
+# Usage: docker-compose -f build.yml run composer-install
+composer-install:
   image: phase2/devtools-build:php70
-  working_dir: /code
-  command: drush make ./drupal8.make.yml ./html 
+  working_dir: /var/www
+  command: composer install --prefer-dist
   volumes:
-    - .:/code/
+    - .:/var/www/
 
-# Reuse from our dev environment
-db:
-  extends:
-    file: docker-compose.yml
-    service: db
-
+# Usage: docker-compose -f build.yml run composer-update
+composer-update:
+  image: phase2/devtools-build:php70
+  working_dir: /var/www
+  command: composer update --prefer-dist
+  volumes:
+    - .:/var/www/

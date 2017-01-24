@@ -1,14 +1,14 @@
 # Example Drupal 8 Development Environment
 
-Example Drupal 8 development environment using Phase2's DevTools VM.
+Example Drupal 8 development environment using DevTools.
 
 ## Setup
 
 Proceed through these steps from the examples/drupal8 directory:
 
-### 1. Use the build container to run drush make to fetch a copy of Drupal 8 and store it in `./html` with:
+### 1. Use the build container to run composer to fetch a copy of Drupal 8 and store it in `./build/html` with:
 
-  - `docker-compose -f build.yml run make`
+  - `docker-compose -f build.yml run composer-install`
 
 ### 2. Start the Apache/PHP and MariaDB containers with:
 
@@ -21,8 +21,8 @@ Proceed through these steps from the examples/drupal8 directory:
 
 ### 4. Ensure the installer has permissions to create the settings files and files directory with:
 
-  - `docker-compose exec www cp /var/www/html/sites/default/default.settings.php /var/www/html/sites/default/settings.php`
-  - `docker-compose exec www chown -R apache:apache /var/www/html/sites/default/files`
+  - `docker-compose exec www cp /var/www/build/html/sites/default/default.settings.php /var/www/build/html/sites/default/settings.php`
+  - `docker-compose exec www chown -R apache:apache /var/www/build/html/sites/default`
 
 ### 5. You should be able to load the Drupal 8 installer by navigating to:
 
@@ -60,4 +60,7 @@ project.
 To get your private key into the build container, volume mount your key into the container at `/root/.ssh/devtools.key` and it will be processed accordingly.
 
 `~/.ssh/id_rsa:/root/.ssh/devtools.key`
+
+!!! NOTE !!!
+If your private key has a name other than `id_rsa` then use that key in the volume mount above.
 

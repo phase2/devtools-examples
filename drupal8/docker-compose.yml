@@ -2,6 +2,7 @@
 www:
   image: phase2/apache-php:php70
   environment:
+    DOCROOT: /var/www/build/html
     # Change some core container settings
     PHP_MAX_EXECUTION_TIME: 45
     # These enable debug/profiling support
@@ -27,7 +28,7 @@ www:
   # machine so they should be namespaced (the value of
   # $DNSDOCK_IMAGE) was used in this case to create a base of /data/d8
   volumes:
-    - ./html:/var/www/html
+    - .:/var/www/
     - /data/d8/files:/var/www/html/sites/default/files
 
 # Container to run our database
