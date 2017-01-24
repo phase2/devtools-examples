@@ -2,16 +2,16 @@
 www:
   image: phase2/apache-php:php70
   environment:
-    # The DNSDOCK variables make this container 
-    # referenceable by www.d8.vm
-    # It is recommended that your DNSDOCK_NAME match your container name
-    DNSDOCK_NAME: www
-    DNSDOCK_IMAGE: d8
     # Change some core container settings
     PHP_MAX_EXECUTION_TIME: 45
     # These enable debug/profiling support
     PHP_XDEBUG: "false"
     PHP_XHPROF: "false"
+  labels:
+    # The dnsdock labels make this container referenceable by www.d8.vm
+    # It is recommended that your com.dnsdock.name match your container name
+    com.dnsdock.name: "www"
+    com.dnsdock.image: "d8"
   # Links become entries in /etc/hosts We can refer to the 
   # database host as db instead of db.d8.vm or IP address
   links:
@@ -33,8 +33,12 @@ www:
 # Container to run our database
 db:
   image: phase2/mariadb
+  labels:
+    # The dnsdock labels make this container referenceable by www.d8.vm
+    # It is recommended that your com.dnsdock.name match your container name
+    com.dnsdock.name: "db"
+    com.dnsdock.image: "d8"
   environment:
-    DNSDOCK_NAME: db
-    DNSDOCK_IMAGE: d8
+    MYSQL_DATABASE: drupal8_example
   volumes:
     - /data/d8/mysql:/var/lib/mysql

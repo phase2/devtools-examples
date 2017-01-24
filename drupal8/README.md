@@ -21,8 +21,8 @@ Proceed through these steps from the examples/drupal8 directory:
 
 ### 4. Ensure the installer has permissions to create the settings files and files directory with:
 
-  - `docker exec -it drupal8_www_1 cp /var/www/html/sites/default/default.settings.php /var/www/html/sites/default/settings.php`
-  - `docker exec -it drupal8_www_1 chown -R apache:apache /var/www/html/sites/default`
+  - `docker-compose exec www cp /var/www/html/sites/default/default.settings.php /var/www/html/sites/default/settings.php`
+  - `docker-compose exec www chown -R apache:apache /var/www/html/sites/default/files`
 
 ### 5. You should be able to load the Drupal 8 installer by navigating to:
 
@@ -32,7 +32,7 @@ Proceed through these steps from the examples/drupal8 directory:
 
 ### 7. Configure the database
 
-  - Database name: <choose any name>
+  - Database name: drupal8_example
   - Database user: admin
   - Database password: admin
   - Database host: db.d8.vm
@@ -60,5 +60,4 @@ project.
 To get your private key into the build container, volume mount your key into the container at `/root/.ssh/devtools.key` and it will be processed accordingly.
 
 `~/.ssh/id_rsa:/root/.ssh/devtools.key`
-
 

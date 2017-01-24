@@ -7,8 +7,8 @@ cli:
   volumes:
     - .:/code/
     - ./html:/var/www/html
-  links:
-    - db
+  external_links:
+    - drupal8_db_1:db
 
 # Container for running drush in the docroot.
 # Usage: docker-compose -f build.yml run drush <command>
@@ -19,8 +19,8 @@ drush:
   working_dir: /var/www/html
   volumes:
     - ./html:/var/www/html
-  links:
-    - db
+  external_links:
+    - drupal8_db_1:db
 
 # Container for running grunt in the docroot.
 # Usage: docker-compose -f build.yml run grunt <command>
@@ -31,8 +31,8 @@ grunt:
   volumes:
     - .:/code/
     - ./html:/var/www/html
-  links:
-    - db
+  external_links:
+    - drupal8_db_1:db
 
 # Container for the drush make command to build the site    
 # Usage: docker-compose -f build.yml run make
