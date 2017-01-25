@@ -1,7 +1,0 @@
-app:
-  image: phase2/nodejs012
-  environment:
-    DNSDOCK_NAME: www
-    DNSDOCK_IMAGE: nodejs
-  volumes:
-    - .:/code

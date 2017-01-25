@@ -29,7 +29,7 @@ www:
   # $DNSDOCK_IMAGE) was used in this case to create a base of /data/d8
   volumes:
     - .:/var/www/
-    - /data/d8/files:/var/www/html/sites/default/files
+    - /data/d8/files:/var/www/build/html/sites/default/files
 
 # Container to run our database
 db:
