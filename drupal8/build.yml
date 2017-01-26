@@ -32,18 +32,20 @@ grunt:
   external_links:
     - drupal8_db:db
 
+# Usage: docker-compose -f build.yml run composer <command>
+composer:
+  image: phase2/devtools-build:php70
+  entrypoint: [ "/init", "composer" ]
+  working_dir: /var/www
+  command: composer update --prefer-dist
+  volumes:
+    - .:/var/www/
+
 # Usage: docker-compose -f build.yml run composer-install
+# Use this pattern if you want to strictly control the options to a command
 composer-install:
   image: phase2/devtools-build:php70
   working_dir: /var/www
   command: composer install --prefer-dist
-  volumes:
-    - .:/var/www/
-
-# Usage: docker-compose -f build.yml run composer-update
-composer-update:
-  image: phase2/devtools-build:php70
-  working_dir: /var/www
-  command: composer update --prefer-dist
   volumes:
     - .:/var/www/

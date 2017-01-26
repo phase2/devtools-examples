@@ -47,11 +47,15 @@ Proceed through these steps from the examples/drupal8 directory:
 
   - `docker-compose -f build.yml run grunt <command>`
 
-### 3. Getting a CLI on the code base (this will open a bash shell)
+### 3. Running composer commands on the site
+
+  - `docker-compose -f build.yml run composer <command>`
+
+### 4. Getting a CLI on the code base (this will open a bash shell)
 
   - `docker-compose -f build.yml run cli`
 
-### 4. Importing a private key into a build container
+### 5. Importing a private key into a build container
 
 When you need to clone data that is in a private repo, you will need to pass your
 SSH private key into the container so that is can be used with git to clone your
