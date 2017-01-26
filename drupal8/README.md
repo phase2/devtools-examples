@@ -10,6 +10,8 @@ Proceed through these steps from the examples/drupal8 directory:
 
   - `docker-compose -f build.yml run --rm composer-install`
 
+The --rm portion of the comand ensures that containers are cleaned up after they exit so you don't need to later do a `docker rm CONTAINER_ID` command
+
 ### 2. Start the Apache/PHP and MariaDB containers with:
 
   - `docker-compose up`
