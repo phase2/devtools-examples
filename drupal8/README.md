@@ -8,7 +8,7 @@ Proceed through these steps from the examples/drupal8 directory:
 
 ### 1. Use the build container to run composer to fetch a copy of Drupal 8 and store it in `./build/html` with:
 
-  - `docker-compose -f build.yml run composer-install`
+  - `docker-compose -f build.yml run --rm composer-install`
 
 ### 2. Start the Apache/PHP and MariaDB containers with:
 
@@ -41,19 +41,19 @@ Proceed through these steps from the examples/drupal8 directory:
 
 ### 1. Running drush commands on the site
 
-  - `docker-compose -f build.yml run drush cache-rebuild`
+  - `docker-compose -f build.yml run --rm drush cache-rebuild`
 
 ### 2. Running grunt commands on the site
 
-  - `docker-compose -f build.yml run grunt <command>`
+  - `docker-compose -f build.yml run --rm grunt <command>`
 
 ### 3. Running composer commands on the site
 
-  - `docker-compose -f build.yml run composer <command>`
+  - `docker-compose -f build.yml run --rm composer <command>`
 
 ### 4. Getting a CLI on the code base (this will open a bash shell)
 
-  - `docker-compose -f build.yml run cli`
+  - `docker-compose -f build.yml run --rm cli`
 
 ### 5. Importing a private key into a build container
 
