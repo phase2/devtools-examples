@@ -1,5 +1,5 @@
 # Container for starting a cli for build commands
-# Usage: docker-compose -f build.yml run cli
+# Usage: docker-compose -f build.yml run --rm cli
 cli:
   image: phase2/devtools-build:php70
   working_dir: /var/www
@@ -10,7 +10,7 @@ cli:
     - drupal8_db:db
 
 # Container for running drush in the docroot.
-# Usage: docker-compose -f build.yml run drush <command>
+# Usage: docker-compose -f build.yml run --rm drush <command>
 # Where <command> is a direct drush command like cache-rebuild
 drush:
   image: phase2/devtools-build:php70
@@ -22,7 +22,7 @@ drush:
     - drupal8_db:db
 
 # Container for running grunt in the docroot.
-# Usage: docker-compose -f build.yml run grunt <command>
+# Usage: docker-compose -f build.yml run --rm grunt <command>
 grunt:
   image: phase2/devtools-build:php70
   entrypoint: [ "/init", "grunt" ]
@@ -32,7 +32,7 @@ grunt:
   external_links:
     - drupal8_db:db
 
-# Usage: docker-compose -f build.yml run composer <command>
+# Usage: docker-compose -f build.yml run --rm composer <command>
 composer:
   image: phase2/devtools-build:php70
   entrypoint: [ "/init", "composer" ]
@@ -41,7 +41,7 @@ composer:
   volumes:
     - .:/var/www/
 
-# Usage: docker-compose -f build.yml run composer-install
+# Usage: docker-compose -f build.yml run --rm composer-install
 # Use this pattern if you want to strictly control the options to a command
 composer-install:
   image: phase2/devtools-build:php70
