@@ -1,0 +1,16 @@
+version: '2.1'
+
+services:
+  # Base service definition which is extended by other compose files.
+  #
+  # Other services inherit these settings via the extends property.
+  # See https://docs.docker.com/compose/extends/#extending-services
+  base:
+    image: phase2/devtools-build:php70
+    working_dir: /code
+    command: /bin/bash
+    network_mode: "bridge"
+    volumes:
+      - ../pattern-lab-starter:/code
+      # allow for persistent npm caching between container runs
+      - ../pattern-lab-starter/.npm:/root/.npm
