@@ -7,7 +7,7 @@ services:
   www:
     command: npm start
     extends:
-      file: base.yml
+      file: build.yml
       service: base
     labels:
       com.dnsdock.name: www
