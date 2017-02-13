@@ -16,7 +16,7 @@ as a sibling to this directory. Example `git clone git@github.com:phase2/pattern
 the pattern lab instance at [http://www.pl.vm:3050](http://www.pl.vm:3050)
 once file processing has completed and the server has started. Watch
 the output of the container to see the start message though note that
-the URLs do not all report incorrectly in that message.
+the URLs do not all report correctly in that message.
 * Speed up change propagation to container by running `devtools watch ../pattern-lab-starter/source`
 * If you want to use tools interactively, you can use the cli container
 by running `docker-compose -f build.yml run --rm cli`
