@@ -1,0 +1,19 @@
+##
+# Operational services to run the application in your local environment.
+##
+version: '2.1'
+
+services:
+  www:
+    command: npm start
+    extends:
+      file: build.yml
+      service: base
+    labels:
+      com.dnsdock.name: www
+      com.dnsdock.image: pl
+    environment:
+      # this is needed to get gulp to note filesystem changes use
+      # devtools watch as well to get updates noticed faster
+      CHOKIDAR_USEPOLLING: 1
+
